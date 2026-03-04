@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ibekwe David — Home</title>
+  <link href="" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0b1f3a;
+      --navy-light: #122847;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --white: #f8f8f5;
+      --gray: #8a8f9a;
+      --border: #1e3455;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Lato', sans-serif;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 60px;
+      background: rgba(11, 31, 58, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: 2px;
+    }
+
+    .nav-links { list-style: none; display: flex; gap: 36px; }
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0.7;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      background:
+        radial-gradient(ellipse at 60% 0%, rgba(201,168,76,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 10% 80%, rgba(201,168,76,0.07) 0%, transparent 50%);
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 6px 18px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      animation: fadeDown 0.7s ease both;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      font-weight: 900;
+      line-height: 1.0;
+      color: var(--white);
+      animation: fadeDown 0.7s 0.1s ease both;
+    }
+
+    .hero-title span { color: var(--gold); }
+
+    .hero-sub {
+      max-width: 520px;
+      margin: 20px auto 0;
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: rgba(248,248,245,0.7);
+      animation: fadeDown 0.7s 0.2s ease both;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 36px;
+      flex-wrap: wrap;
+      animation: fadeDown 0.7s 0.3s ease both;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 4px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    .btn-outline {
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 4px;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover { background: var(--gold); color: var(--navy); transform: translateY(-2px); }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-top: 60px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      animation: fadeDown 0.7s 0.4s ease both;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      padding: 24px 44px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+      background: var(--navy-light);
+    }
+    .stat-item:last-child { border-right: none; }
+
+    .stat-num {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .stat-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+
+    /* ── WHAT I DO ── */
+    .section {
+      padding: 90px 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 50px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--navy-light);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 32px 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .service-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .service-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 32px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--gray);
+    }
+
+    footer a { color: var(--gold); text-decoration: none; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { gap: 20px; }
+      .section { padding: 60px 24px; }
+      .stat-item { padding: 18px 24px; }
+    }
+
+    @media (max-width: 520px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo"><img src = "c:\Users\HP\Desktop\472400706_1126264545692872_7292238271863593051_n.jpg" 
+      style = "height: 60px; width:60px; border-radius: 50px;"></div>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <!--p class="hero-tag">Course Facilitator &nbsp;·&nbsp; Content Creator &nbsp;·&nbsp; Web Designer</p-->
+    <br>
+    <h1 class="hero-title">Ibekwe<br/><span>David</span></h1>
+    <p class="hero-sub">Empowering the next generation through technology, creativity, and education.</p>
+    <div class="hero-btns">
+      <a href="portfolio.html" class="btn-primary">View My Work</a>
+      <a href="contact.html" class="btn-outline">Get In Touch</a>
+    </div>
+    <!--div class="stats-bar">
+      <div class="stat-item">
+        <span class="stat-num">100+</span>
+        <span class="stat-label">Students Trained</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">5+</span>
+        <span class="stat-label">Roles Held</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">6+</span>
+        <span class="stat-label">Certifications</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">2028</span>
+        <span class="stat-label">Expected Grad.</span>
+      </div-->
+    </div>
+  </section>
+
+  <!-- WHAT I DO -->
+  <div class="section">
+    <p class="section-label">What I Do</p>
+    <h2 class="section-title">Areas of Expertise</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🎓</div>
+        <h3>Tech Education</h3>
+        <p>Facilitating coding, web design, and digital literacy for learners aged 6–18 via FlipLearnKids and Access Bank's Tech Skill-Up curriculum.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎬</div>
+        <h3>Content Creation</h3>
+        <p>Filming and editing promotional content for digital platforms. Experienced with CapCut, Canva, and social media storytelling.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🌐</div>
+        <h3>Web Design</h3>
+        <p>Building structured, styled web pages using HTML/CSS with a focus on clean layouts, accessibility, and responsive design.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">✏️</div>
+        <h3>Digital Journalism</h3>
+        <p>Sourcing and writing headline news as an Editorial Intern at <em>Look at Us</em>, covering <em>Pop Culture News</em>> with clarity and accuracy.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Ibekwe David &nbsp; </p>
+  </footer>
+
+</body>
+</html>

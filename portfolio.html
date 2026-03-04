@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ibekwe David — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0b1f3a;
+      --navy-light: #122847;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --white: #f8f8f5;
+      --gray: #8a8f9a;
+      --border: #1e3455;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Lato', sans-serif;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 60px;
+      background: rgba(11,31,58,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: 2px;
+    }
+    .nav-links { list-style: none; display: flex; gap: 36px; }
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0.7;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 140px 60px 60px;
+      text-align: center;
+      background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.1) 0%, transparent 60%);
+    }
+    .page-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      color: var(--white);
+      animation: fadeUp 0.6s ease both;
+    }
+    .page-title span { color: var(--gold); }
+    .page-sub {
+      max-width: 520px;
+      margin: 16px auto 0;
+      font-size: 15px;
+      color: var(--gray);
+    }
+
+    /* FILTER TABS */
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 0 60px 50px;
+    }
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--gray);
+      font-family: 'Lato', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--navy);
+    }
+
+    /* PORTFOLIO GRID */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 60px 80px;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 28px;
+    }
+
+    .project-card {
+      background: var(--navy-light);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+      animation: fadeUp 0.5s ease both;
+    }
+    .project-card:hover { border-color: var(--gold); transform: translateY(-5px); }
+
+    .project-thumb {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .thumb-web     { background: linear-gradient(135deg, #0f2d50, #1a4a7a); }
+    .thumb-content { background: linear-gradient(135deg, #2a1a0a, #5a3a10); }
+    .thumb-design  { background: linear-gradient(135deg, #1a0a2a, #3a1a5a); }
+    .thumb-edu     { background: linear-gradient(135deg, #0a2a1a, #1a5a3a); }
+
+    .project-body { padding: 24px; }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .project-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.25);
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    .project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .project-desc {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .project-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+
+    .project-tech {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .tech-pill {
+      font-size: 11px;
+      color: var(--gray);
+      background: rgba(255,255,255,0.05);
+      padding: 3px 10px;
+      border-radius: 4px;
+    }
+
+    /* CERTIFICATIONS */
+    .certs-section {
+      margin-top: 80px;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 32px;
+    }
+
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .cert-card {
+      background: var(--navy-light);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+    .cert-card:hover { border-color: var(--gold); }
+    .cert-icon { font-size: 1.8rem; flex-shrink: 0; }
+    .cert-info h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .cert-info p { font-size: 12px; color: var(--gray); }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 32px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--gray);
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { gap: 18px; }
+      .page-header { padding: 120px 24px 40px; }
+      .filter-bar { padding: 0 24px 36px; }
+      .container { padding: 0 24px 60px; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo"><img src = "c:\Users\HP\Desktop\472400706_1126264545692872_7292238271863593051_n.jpg" 
+      style = "height: 60px; width:60px; border-radius: 50px;"></div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="portfolio.html" class="active">Portfolio</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <p class="page-label">My Work</p>
+    <h1 class="page-title">Port<span>folio</span></h1>
+    <p class="page-sub">A selection of projects spanning web design, content creation, education, music, and graphic design.</p>
+  </div>
+
+  <!-- FILTER TABS -->
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
+    <button class="filter-btn" onclick="filterCards('web', this)">Web Design</button>
+    <button class="filter-btn" onclick="filterCards('content', this)">Content</button>
+    <button class="filter-btn" onclick="filterCards('edu', this)">Education</button>
+    <button class="filter-btn" onclick="filterCards('design', this)">Design</button>
+    <button class="filter-btn" onclick="filterCards('music', this)">Music</button>
+  </div>
+
+  <div class="container">
+    <div class="portfolio-grid" id="portfolioGrid">
+
+      <!-- WEB PROJECTS -->
+      <div class="project-card" data-category="web">
+        <div class="project-thumb thumb-web">🌐</div>
+        <div class="project-body">
+          <div class="project-tags"><span class="project-tag">Web Design</span></div>
+          <h3 class="project-title"><a href = "C:\Users\HP\Desktop\Intro to Web\registration_form.html" style = "color: white;">Registration Form</a></h3>
+          <p class="project-desc">A fully functional registration form with text, email, password, number, radio, and checkbox inputs. Includes a JavaScript-powered summary table that displays submitted data dynamically without page reload.</p>
+          <div class="project-footer">
+            <div class="project-tech">
+              <span class="tech-pill">HTML</span>
+              <span class="tech-pill">CSS</span>
+              <span class="tech-pill">JavaScript</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="web">
+        <div class="project-thumb thumb-web">📊</div>
+        <div class="project-body">
+          <div class="project-tags"><span class="project-tag">Web Design</span></div>
+          <h3 class="project-title"><a href = "C:\Users\HP\Desktop\Intro to Web\student_grades.html" style = "color: white;">Student Grades Table</a></h3>
+          <p class="project-desc">An HTML table displaying student academic performance across assignments and final exams, with a class average row. Styled with border, cellpadding, and cellspacing attributes for clean layout.</p>
+          <div class="project-footer">
+            <div class="project-tech">
+              <span class="tech-pill">HTML</span>
+              <span class="tech-pill">CSS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="web">
+        <div class="project-thumb thumb-web">💻</div>
+        <div class="project-body">
+          <div class="project-tags"><span class="project-tag">Web Design</span></div>
+          <h3 class="project-title"><a href = "portfolio.html" style = " color: white;">Personal Portfolio Website</a></h3>
+          <p class="project-desc">A responsive 4-page personal website (Home, About, Portfolio, Contact) built with semantic HTML5, CSS Flexbox and Grid, media queries, and JavaScript interactivity.</p>
+          <div class="project-footer">
+            <div class="project-tech">
+              <span class="tech-pill">HTML5</span>
+              <span class="tech-pill">CSS3</span>
+              <span class="tech-pill">JavaScript</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTENT PROJECTS -->
+      <div class="project-card" data-category="content">
+        <div class="project-thumb thumb-content">🎬</div>
+        <div class="project-body">
+          <div class="project-tags"><span class="project-tag">Content Creation</span></div>
+          <h3 class="project-title">FlipLearnKids Promotional Videos</h3>
+          <p class="project-desc">Filmed and edited promotional and engaging content for FlipLearnKids. Produced short-form video content tailored for social media to drive awareness and learner enrollment.</p>
+          <div class="project-footer">
+            <div class="project-tech">
+              <span class="tech-pill">CapCut</span>
+              <span class="tech-pill">Canva</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="content">
+        <div class="project-thumb thumb-content">📰</div>
+        <div class="project-body">
+          <div class="project-tags"><span class="project-tag">Digital Journalism</span></div>
+          <h3 class="project-title">Editorial Work — Look at Us</h3>
+          <p class="project-desc">Sourcing, writing, and publishing headline news articles as an Editorial Intern. Covering topics across tech, youth development, culture and trending events in Nigeria.</p>
+          <div class="project-footer">
+            <div class="project-tech">
+              <span class="tech-pill">Journalism</span>
+              <span class="tech-pill">Copywriting</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EDUCATION PROJECTS -->
+      <div class="project-card" data-category="edu">
+        <div class="project-thumb thumb-edu">🎓</div>
+        <div class="project-body">
+          <div class="project-tags"><span class="project-tag">Education</span></div>
+          <h3 class="project-title">Access Bank Tech Skill-Up Curriculum</h3>
+          <p class="project-desc">Designed and implemented custom Scratch block-based coding lesson plans aligned with the Access Bank Tech Skill-Up curriculum. Trained 100+ students aged 6–18 in coding and web design.</p>
+          <div class="project-footer">
+            <div class="project-tech">
+              <span class="tech-pill">Scratch</span>
+              <span class="tech-pill">Web Design</span>
+              <span class="tech-pill">Curriculum Dev</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="edu">
+        <div class="project-thumb thumb-edu">🔢</div>
+        <div class="project-body">
+          <div class="project-tags"><span class="project-tag">Education</span></div>
+          <h3 class="project-title">One-on-One PSSA Numeracy Tutoring</h3>
+          <p class="project-desc">Provided personalised Numeracy tutoring to a primary school student via FlipLearnKids for the PSSA exams. The student achieved an excellent result, validating the effectiveness of the approach.</p>
+          <div class="project-footer">
+            <div class="project-tech">
+              <span class="tech-pill">Tutoring</span>
+              <span class="tech-pill">Numeracy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DESIGN PROJECTS -->
+      <div class="project-card" data-category="design">
+        <div class="project-thumb thumb-design">🎨</div>
+        <div class="project-body">
+          <div class="project-tags"><span class="project-tag">Graphic Design</span></div>
+          <h3 class="project-title">FLID Graphic Design Work</h3>
+          <p class="project-desc">Created visual designs and digital assets for FLID, supporting their educational and digital literacy campaigns. Produced graphics aligned with brand identity using Canva.</p>
+          <div class="project-footer">
+            <div class="project-tech">
+              <span class="tech-pill">Canva</span>
+              <span class="tech-pill">Graphic Design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="design">
+        <div class="project-thumb thumb-design">👗</div>
+        <div class="project-body">
+          <div class="project-tags"><span class="project-tag">Design</span></div>
+          <h3 class="project-title">WEFash Impact Project</h3>
+          <p class="project-desc">Completed the WEFash Impact Project in Fashion and Design (Certificate of Completion, 2025). Served as Vice-Class President, blending creativity with leadership throughout the program.</p>
+          <div class="project-footer">
+            <div class="project-tech">
+              <span class="tech-pill">Fashion Design</span>
+              <span class="tech-pill">Leadership</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="music">
+        <div class="project-thumb thumb-music">🎵 </div>
+        <div class="project-body">
+          <div class="project-tags"><span class="project-tag">Music</span></div>
+          <h3 class="project-title"><a href = "Spotify_disco.html" style = "color: white;">Discography</a></h3>
+          <p class="project-desc">Discography with amazing songs. From heartfelt music to <em>Pop Hits</em> like <em><a href = "https://open.spotify.com/track/6gXcyh040vQKb7uEQK4XVJ?si=88f2b9152a10475b" style = "color: white;">I Wanna Be On Disney</a></em></p>
+          <div class="project-footer">
+            <div class="project-tech">
+              <span class="tech-pill">Canva</span>
+              <span class="tech-pill">Graphic Design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CERTIFICATIONS -->
+    <div class="certs-section">
+      <p class="section-label">Credentials</p>
+      <h2 class="section-title">Certifications</h2>
+      <div class="certs-grid">
+        <div class="cert-card">
+          <div class="cert-icon">🏅</div>
+          <div class="cert-info">
+            <h4>WEFash Impact Project</h4>
+            <p>Fashion & Design · Certificate of Completion · 2025</p>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon">🎬</div>
+          <div class="cert-info">
+            <h4>Del-York Creative Academy</h4>
+            <p>Introduction to Animation & Post Production · 2024</p>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon">🤖</div>
+          <div class="cert-info">
+            <h4>Lagos State Robotics</h4>
+            <p>Certificate of Participation · 2022</p>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon">💻</div>
+          <div class="cert-info">
+            <h4>Cadbury Bournvita Tech Boot Camp</h4>
+            <p>Certificate of Participation · Best Participant · 2020</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Ibekwe David &nbsp;&nbsp;</p>
+  </footer>
+
+  <script>
+    function filterCards(category, btn) {
+      // Update active button
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Show/hide cards
+      document.querySelectorAll('.project-card').forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>

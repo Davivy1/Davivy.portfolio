@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ibekwe David — Contact</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0b1f3a;
+      --navy-light: #122847;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --white: #f8f8f5;
+      --gray: #8a8f9a;
+      --border: #1e3455;
+      --success: #4caf84;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Lato', sans-serif;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 60px;
+      background: rgba(11,31,58,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: 2px;
+    }
+    .nav-links { list-style: none; display: flex; gap: 36px; }
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0.7;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 140px 60px 60px;
+      text-align: center;
+      background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.1) 0%, transparent 60%);
+    }
+    .page-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      color: var(--white);
+      animation: fadeUp 0.6s ease both;
+    }
+    .page-title span { color: var(--gold); }
+    .page-sub {
+      max-width: 500px;
+      margin: 16px auto 0;
+      font-size: 15px;
+      color: var(--gray);
+    }
+
+    /* LAYOUT */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 60px 100px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    /* LEFT — INFO */
+    .contact-info h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+
+    .contact-info p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+
+    .info-list { list-style: none; }
+    .info-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .info-list li:first-child { border-top: 1px solid var(--border); }
+
+    .info-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .info-text span {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 3px;
+    }
+
+    .info-text a, .info-text p {
+      font-size: 14px;
+      color: var(--white);
+      text-decoration: none;
+      margin: 0;
+      transition: color 0.2s;
+    }
+    .info-text a:hover { color: var(--gold); }
+
+    /* SOCIAL LINKS */
+    .social-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--navy-light);
+      border: 1px solid var(--border);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 8px;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+    .social-btn:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    /* RIGHT — FORM */
+    .contact-form {
+      background: var(--navy-light);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 40px;
+    }
+
+    .contact-form h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 28px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--white);
+      font-family: 'Lato', sans-serif;
+      font-size: 14px;
+      padding: 12px 16px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(138,143,154,0.6); }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+    }
+
+    .form-group select option { background: var(--navy); }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 130px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Lato', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 8px;
+      padding: 15px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: 8px;
+    }
+    .submit-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    /* SUCCESS MESSAGE */
+    .success-msg {
+      display: none;
+      background: rgba(76,175,132,0.1);
+      border: 1px solid var(--success);
+      border-radius: 8px;
+      padding: 16px 20px;
+      color: var(--success);
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    /* AVAILABILITY BANNER */
+    .availability {
+      margin-top: 60px;
+      background: var(--navy-light);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 10px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .avail-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--success);
+      flex-shrink: 0;
+      box-shadow: 0 0 8px var(--success);
+      animation: pulse 2s infinite;
+    }
+    .availability p {
+      font-size: 14px;
+      color: var(--gray);
+    }
+    .availability strong { color: var(--white); }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 32px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--gray);
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { gap: 18px; }
+      .page-header { padding: 120px 24px 40px; }
+      .container { padding: 0 24px 60px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form { padding: 28px 22px; }
+    }
+    @media (max-width: 520px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo"><img src = "c:\Users\HP\Desktop\472400706_1126264545692872_7292238271863593051_n.jpg" 
+      style = "height: 60px; width:60px; border-radius: 50px;"></div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <p class="page-label">Reach Out</p>
+    <h1 class="page-title">Get In <span>Touch</span></h1>
+    <p class="page-sub">Whether it's a collaboration, tutoring enquiry, or just a hello — I'd love to hear from you.</p>
+  </div>
+
+  <div class="container">
+
+    <div class="contact-grid">
+
+      <!-- LEFT: CONTACT INFO -->
+      <div class="contact-info">
+        <h2>Let's Work Together</h2>
+        <p>I'm open to freelance web design projects, content creation gigs, tutoring opportunities, and speaking or media engagements.</p>
+
+        <ul class="info-list">
+          <li>
+            <div class="info-icon">📧</div>
+            <div class="info-text">
+              <span>Email</span>
+              <a href="mailto:davidpraiseibk@gmail.com">davidpraiseibk@gmail.com</a>
+            </div>
+          </li>
+          <li>
+            <div class="info-icon">📞</div>
+            <div class="info-text">
+              <span>Phone</span>
+              <a href="tel:+2349167421865">+234 916 742 1865</a>
+            </div>
+          </li>
+          <li>
+            <div class="info-icon">📍</div>
+            <div class="info-text">
+              <span>Location</span>
+              <p>Ikorodu, Lagos State, Nigeria</p>
+            </div>
+          </li>
+          <li>
+            <div class="info-icon">🔗</div>
+            <div class="info-text">
+              <span>LinkedIn</span>
+              <a href="https://www.linkedin.com/in/davidibekwe" target="_blank">linkedin.com/in/davidibekwe</a>
+            </div>
+          </li>
+        </ul>
+
+        <div class="social-row">
+          <a href="https://www.linkedin.com/in/davidibekwe" target="_blank" class="social-btn">🔗 LinkedIn</a>
+          <a href="mailto:davidpraiseibk@gmail.com" class="social-btn">📧 Email</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: FORM -->
+      <div class="contact-form">
+        <h3>Send a Message</h3>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" placeholder="e.g. John"/>
+          </div>
+          <div class="form-group">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" placeholder="e.g. Doe"/>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="cemail">Email Address</label>
+          <input type="email" id="cemail" placeholder="your@email.com"/>
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <select id="subject">
+            <option value="" disabled selected>Select a topic...</option>
+            <option>Web Design Project</option>
+            <option>Tutoring / Education</option>
+            <option>Content Creation</option>
+            <option>Collaboration</option>
+            <option>Media / Speaking</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Tell me about your project or enquiry..."></textarea>
+        </div>
+
+        <button class="submit-btn" type="button" onclick="sendMessage()">Send Message →</button>
+
+        <div class="success-msg" id="successMsg">
+          ✅ Message received! I'll get back to you as soon as possible.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- AVAILABILITY BANNER -->
+    <div class="availability">
+      <div class="avail-dot"></div>
+      <p><strong>Currently available</strong> for freelance web design, content creation, and online tutoring opportunities.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Ibekwe David &nbsp;&nbsp; </p>
+  </footer>
+
+  <script>
+    function sendMessage() {
+      var fname   = document.getElementById('fname').value.trim();
+      var lname   = document.getElementById('lname').value.trim();
+      var email   = document.getElementById('cemail').value.trim();
+      var subject = document.getElementById('subject').value;
+      var message = document.getElementById('message').value.trim();
+
+      if (!fname || !lname || !email || !subject || !message) {
+        alert('Please fill in all fields before sending.');
+        return;
+      }
+
+      // Show success message
+      var successMsg = document.getElementById('successMsg');
+      successMsg.style.display = 'block';
+
+      // Clear the form
+      document.getElementById('fname').value    = '';
+      document.getElementById('lname').value    = '';
+      document.getElementById('cemail').value   = '';
+      document.getElementById('subject').value  = '';
+      document.getElementById('message').value  = '';
+
+      // Hide success after 5 seconds
+      setTimeout(function() {
+        successMsg.style.display = 'none';
+      }, 5000);
+    }
+  </script>
+
+</body>
+</html>
